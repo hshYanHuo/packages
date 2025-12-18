@@ -1,7 +1,58 @@
 menu "RT-Thread packages add by yanhuo "
 
+menuconfig PKG_USING_MY_AT_DEVICE
+    bool "MY AT DEVICE: RT-Thread AT component porting or samples for different device"
+    default n
 
-source "$PKGS_DIR/packages/peripherals/my_at_device/sim7600ce/Kconfig"
+if PKG_USING_AT_DEVICE
+
+    config PKG_MY_AT_DEVICE_PATH
+        string
+        default "/packages/peripherals/my_at_device"
+
+    if PKG_MY_AT_DEVICE_VER_NUM >= 0x20000
+
+        source "$PKGS_DIR/packages/peripherals/my_at_device/sim7600ce/Kconfig"
+
+    endif
+
+    if PKG_MY_AT_DEVICE_VER_NUM < 0x20000
+
+    endif
+
+    choice
+
+            prompt "Version"
+            default PKG_USING_MY_AT_DEVICE_LATEST_VERSION if (RT_VER_NUM >= 0x40004)
+
+            help
+                Select the at_device version
+
+            if (AT_SW_VERSION_NUM >= 0x10300)
+
+                config PKG_USING_MY_AT_DEVICE_V210
+                    bool "v2.1.0"
+
+            endif
+
+
+            config PKG_USING_MY_AT_DEVICE_LATEST_VERSION
+                bool "latest"
+
+        endchoice
+
+        config PKG_MY_AT_DEVICE_VER
+            string
+            default "latest"    if PKG_USING_MY_AT_DEVICE_LATEST_VERSION
+            default "v2.1.0"    if PKG_USING_MY_AT_DEVICE_V210
+
+
+        config PKG_MY_AT_DEVICE_VER_NUM
+            hex
+            default 0x99999    if PKG_USING_MY_AT_DEVICE_LATEST_VERSION
+            default 0x20100    if PKG_USING_MY_AT_DEVICE_V210
+
+    endif
 
 
 endmenu
