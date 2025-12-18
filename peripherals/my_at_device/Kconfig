@@ -1,0 +1,7 @@
+menu "RT-Thread packages add by yanhuo "
+
+
+source "$PKGS_DIR/packages/peripherals/my_at_device/sim7600ce/Kconfig"
+
+
+endmenu
