@@ -4,7 +4,7 @@ menuconfig PKG_USING_MY_AT_DEVICE
     bool "MY AT DEVICE: RT-Thread AT component porting or samples for different device"
     default n
 
-if PKG_USING_AT_DEVICE
+if PKG_USING_MY_AT_DEVICE
 
     config PKG_MY_AT_DEVICE_PATH
         string
@@ -26,7 +26,7 @@ if PKG_USING_AT_DEVICE
             default PKG_USING_MY_AT_DEVICE_LATEST_VERSION if (RT_VER_NUM >= 0x40004)
 
             help
-                Select the at_device version
+                Select the my_at_device version
 
             if (AT_SW_VERSION_NUM >= 0x10300)
 
